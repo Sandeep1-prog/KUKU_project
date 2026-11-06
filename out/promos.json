@@ -36,7 +36,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 2,
@@ -74,7 +77,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 3,
@@ -115,7 +121,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 4,
@@ -155,7 +164,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 5,
@@ -195,7 +207,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 6,
@@ -234,7 +249,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 7,
@@ -273,7 +291,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 8,
@@ -313,7 +334,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 9,
@@ -352,7 +376,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "START",
+    "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
   },
   {
     "rank": 10,
@@ -392,7 +419,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 11,
@@ -431,7 +461,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 12,
@@ -470,7 +503,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 13,
@@ -510,7 +546,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 14,
@@ -549,7 +588,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 15,
@@ -587,7 +629,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 16,
@@ -626,7 +671,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 17,
@@ -666,7 +714,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 18,
@@ -707,7 +758,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   },
   {
     "rank": 19,
@@ -746,7 +800,10 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "MID",
+    "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
   },
   {
     "rank": 20,
@@ -784,6 +841,9 @@
       ],
       "clarity": [],
       "intensity": []
-    }
+    },
+    "phase": "CLIMAX",
+    "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
   }
 ]

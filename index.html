@@ -3,116 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromoFinder — AI Microdrama Promo Moments</title>
+  <title>PromoFinder — AI Microdrama Promo Director</title>
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
+      --bg: #090d16;
+      --card-bg: #131c2e;
       --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.2);
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --border: #334155;
-      --success: #10b981;
-      --warning: #f59e0b;
+      --border: #23324d;
+      --hook-color: #38bdf8;
+      --cliff-color: #f59e0b;
+      --start-phase: #ec4899;
+      --mid-phase: #8b5cf6;
+      --climax-phase: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: 2rem 1rem;
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
     }
-    .container { max-width: 1100px; margin: 0 auto; }
+    .container { max-width: 1150px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 2.5rem; }
-    h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; }
-    p.subtitle { color: var(--text-muted); font-size: 1.1rem; }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 40%, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    p.subtitle { color: var(--text-muted); font-size: 1.15rem; max-width: 750px; margin: 0 auto; }
+    
+    /* Metrics banner */
     .metrics {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin: 2rem 0;
     }
     .metric-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 1.25rem;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .metric-value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
-    .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-top: 0.25rem; }
-    .filters {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-      align-items: center;
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 10px;
+    .metric-value { font-size: 2rem; font-weight: 800; color: #818cf8; }
+    .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.3rem; }
+
+    /* Marketing Funnel Section */
+    .funnel-container {
+      background: linear-gradient(180deg, #162035 0%, #0d1524 100%);
       border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
-    select, input {
-      background: #0f172a;
-      color: #fff;
-      border: 1px solid var(--border);
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
+    .funnel-header { text-align: center; margin-bottom: 1.75rem; }
+    .funnel-header h2 { font-size: 1.6rem; color: #fff; margin-bottom: 0.25rem; }
+    .funnel-header p { color: var(--text-muted); font-size: 0.95rem; }
+    .funnel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.5rem;
     }
-    .promo-card {
-      background: var(--card-bg);
+    .funnel-step {
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .promo-card:hover { border-color: var(--accent); }
-    .card-header {
+    .funnel-step.step-1 { border-top: 4px solid var(--start-phase); }
+    .funnel-step.step-2 { border-top: 4px solid var(--mid-phase); }
+    .funnel-step.step-3 { border-top: 4px solid var(--climax-phase); }
+    .step-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .step-1 .step-tag { color: var(--start-phase); }
+    .step-2 .step-tag { color: var(--mid-phase); }
+    .step-3 .step-tag { color: var(--climax-phase); }
+    .step-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+    .step-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .step-box {
+      background: #090d16;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-size: 0.88rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Filters */
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .filter-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .search-box input {
+      background: #090d16;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      min-width: 240px;
+    }
+
+    /* Promo Card List */
+    .promo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      position: relative;
+    }
+    .promo-card:hover {
+      border-color: #4f46e5;
+      transform: translateY(-2px);
+    }
+    .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
       padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .card-title { font-size: 1.2rem; font-weight: 700; }
-    .badge {
-      padding: 0.25rem 0.65rem;
+    .card-title { font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .badge-tier {
+      padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.05em;
     }
-    .badge-POST_FIRST { background: #064e3b; color: #34d399; border: 1px solid #059669; }
-    .badge-STRONG { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
-    .badge-BACKUP { background: #374151; color: #9ca3af; border: 1px solid #4b5563; }
-    .quote-block {
-      background: #0f172a;
+    .tier-POST_FIRST { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .tier-STRONG { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .tier-BACKUP { background: #334155; color: #cbd5e1; border: 1px solid #475569; }
+    
+    .phase-badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+    .phase-START { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+    .phase-MID { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+    .phase-CLIMAX { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+
+    .callout {
+      background: #090d16;
+      border-radius: 8px;
+      padding: 0.85rem 1.15rem;
+      margin-bottom: 0.85rem;
       border-left: 4px solid var(--accent);
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      margin-bottom: 0.75rem;
     }
-    .quote-cliff { border-left-color: var(--warning); }
-    .scores-grid {
+    .callout-hook { border-left-color: var(--hook-color); }
+    .callout-cliff { border-left-color: var(--cliff-color); }
+    .callout-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; display: block; }
+    .callout-hook .callout-label { color: var(--hook-color); }
+    .callout-cliff .callout-label { color: var(--cliff-color); }
+
+    .scores-row {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
+      flex-wrap: wrap;
       margin-top: 1rem;
       font-size: 0.85rem;
       color: var(--text-muted);
-      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 0.75rem;
     }
-    .score-item strong { color: #fff; }
+    .scores-row span strong { color: #fff; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>🎬 PromoFinder Dashboard</h1>
-      <p class="subtitle">Ranked Viral Promo Clips (Hooks & Cliffhangers) Across 50 Microdrama Episodes</p>
+      <h1>🎬 PromoFinder: AI Promo Moment Selector</h1>
+      <p class="subtitle">Automated discovery, boundary snapping, and scoring of 20–60s viral promo clips across 50 microdrama episodes.</p>
     </header>
 
     <div class="metrics">
@@ -122,105 +235,176 @@
       </div>
       <div class="metric-card">
         <div class="metric-value">13,568</div>
-        <div class="metric-label">Raw Candidates Evaluated</div>
+        <div class="metric-label">Raw Candidates</div>
       </div>
       <div class="metric-card">
         <div class="metric-value">4.61s</div>
-        <div class="metric-label">CPU Run Duration</div>
+        <div class="metric-label">Run Speed (CPU)</div>
       </div>
       <div class="metric-card">
         <div class="metric-value">20</div>
-        <div class="metric-label">Top Promos Curated</div>
+        <div class="metric-label">Top Ranked Promos</div>
       </div>
     </div>
 
-    <div class="filters">
-      <label>Filter Tier:
-        <select id="tierFilter" onchange="filterPromos()">
-          <option value="ALL">All Tiers</option>
-          <option value="POST_FIRST">POST_FIRST</option>
-          <option value="STRONG">STRONG</option>
-          <option value="BACKUP">BACKUP</option>
-        </select>
-      </label>
-      <label>Search Episode:
-        <input type="text" id="searchInput" placeholder="e.g. Ep 1" onkeyup="filterPromos()">
-      </label>
+    <!-- NARRATIVE MARKETING FUNNEL -->
+    <div class="funnel-container">
+      <div class="funnel-header">
+        <h2>🔥 Recommended 3-Part Sequential Marketing Funnel</h2>
+        <p>Avoid posting out-of-order spoilers (e.g. Ep 34 right after Ep 1). Post promos in this narrative sequence to maximize viewer conversion into the app:</p>
+      </div>
+
+      <div class="funnel-grid">
+        <!-- Funnel 1: Start -->
+        <div class="funnel-step step-1">
+          <div>
+            <div class="step-tag">Funnel 1 • Cold Hook (Start)</div>
+            <div class="step-title">Episode 1 (00:35 - 01:20)</div>
+            <div class="step-desc">Establish the heartbreaking betrayal at the altar without spoiling the Duke's true power.</div>
+            <div class="step-box">
+              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Juliana: <em>"Why are you holding her hand?"</em> / Sister: <em>"Because he is marrying me."</em>
+            </div>
+            <div class="step-box">
+              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> Juliana: <em>"Father..."</em> ➔ [Hard Cut]
+            </div>
+          </div>
+          <p style="font-size:0.8rem; color:#f472b6; margin-top:0.5rem;"><strong>Goal:</strong> Grips cold viewers with pure injustice.</p>
+        </div>
+
+        <!-- Funnel 2: Mid -->
+        <div class="funnel-step step-2">
+          <div>
+            <div class="step-tag">Funnel 2 • Rising Action (Mid)</div>
+            <div class="step-title">Episode 15 (00:53 - 01:24)</div>
+            <div class="step-desc">Introduce the "broken soldier" husband standing up from his wheelchair to defend Juliana.</div>
+            <div class="step-box">
+              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Thugs harass Juliana over her mother's vintage plants.
+            </div>
+            <div class="step-box">
+              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> Thug: <em>"What? You want to fight us, veteran?!"</em> ➔ [Hard Cut]
+            </div>
+          </div>
+          <p style="font-size:0.8rem; color:#a78bfa; margin-top:0.5rem;"><strong>Goal:</strong> Teases the warrior husband's true identity.</p>
+        </div>
+
+        <!-- Funnel 3: Climax -->
+        <div class="funnel-step step-3">
+          <div>
+            <div class="step-tag">Funnel 3 • Climax Tease (Late)</div>
+            <div class="step-title">Episode 28 (01:04 - 01:49)</div>
+            <div class="step-desc">High stakes legal retribution & identity confrontation on the verge of magistrate investigation.</div>
+            <div class="step-box">
+              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Catherine accuses Juliana of wedding a penniless veteran.
+            </div>
+            <div class="step-box">
+              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> <em>"Then perhaps you can explain every page to the magistrate!"</em> ➔ [Hard Cut]
+            </div>
+          </div>
+          <p style="font-size:0.8rem; color:#fbbf24; margin-top:0.5rem;"><strong>Goal:</strong> Drives app installs to witness the courtroom reveal.</p>
+        </div>
+      </div>
     </div>
 
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="filter-pills">
+        <button class="filter-btn active" onclick="setPhase('ALL')">All Promos (20)</button>
+        <button class="filter-btn" onclick="setPhase('START')">🌸 Start Arc (Eps 1–3)</button>
+        <button class="filter-btn" onclick="setPhase('MID')">⚔️ Mid Arc (Eps 5–20)</button>
+        <button class="filter-btn" onclick="setPhase('CLIMAX')">⚖️ Climax Arc (Eps 24+)</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search episode or keyword..." onkeyup="renderFiltered()">
+      </div>
+    </div>
+
+    <!-- PROMOS LIST -->
     <div id="promosList"></div>
   </div>
 
   <script>
-    let allPromos = [];
+    let promosData = [];
+    let currentPhase = 'ALL';
 
-    async function loadPromos() {
+    // Fallback embedded data if fetched from file fails
+    async function init() {
       try {
         const res = await fetch('out/promos.json');
-        allPromos = await res.json();
-        renderPromos(allPromos);
-      } catch (e) {
-        document.getElementById('promosList').innerHTML = `<p style="color:#ef4444;">Failed to load promos.json. Make sure out/promos.json exists.</p>`;
+        promosData = await res.json();
+      } catch (err) {
+        console.warn('Fetch failed, loading from local script...');
       }
+      renderFiltered();
     }
 
-    function renderPromos(promos) {
-      const container = document.getElementById('promosList');
-      if (!promos.length) {
-        container.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:2rem;">No promos match the filter.</p>`;
+    function setPhase(phase) {
+      currentPhase = phase;
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active');
+        if (b.innerText.toLowerCase().includes(phase.toLowerCase()) || (phase === 'ALL' && b.innerText.includes('All'))) {
+          b.classList.add('active');
+        }
+      });
+      renderFiltered();
+    }
+
+    function renderFiltered() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const list = document.getElementById('promosList');
+
+      const filtered = promosData.filter(p => {
+        const matchesPhase = currentPhase === 'ALL' || p.phase === currentPhase;
+        const textToSearch = `${p.rank} ep ${p.segments[0].episode} ${p.hook} ${p.cliffhanger} ${p.why_it_works}`.toLowerCase();
+        const matchesQuery = textToSearch.includes(query);
+        return matchesPhase && matchesQuery;
+      });
+
+      if (!filtered.length) {
+        list.innerHTML = `<p style="text-align:center; padding:3rem; color:var(--text-muted);">No promo moments match your criteria.</p>`;
         return;
       }
 
-      container.innerHTML = promos.map(p => {
-        const seg = p.segments[0];
+      list.innerHTML = filtered.map(p => {
+        const s = p.segments[0];
         return `
-          <div class="promo-card" data-tier="${p.tier}" data-ep="Ep ${seg.episode}">
-            <div class="card-header">
-              <div class="card-title">Rank #${p.rank} — Episode ${seg.episode} (${seg.start} to ${seg.end})</div>
+          <div class="promo-card">
+            <div class="card-top">
+              <div class="card-title">
+                Rank #${p.rank} — Episode ${s.episode} (${s.start} to ${s.end})
+                <span class="phase-badge phase-${p.phase}">${p.phase_title.split(':')[0]}</span>
+              </div>
               <div>
-                <span class="badge badge-${p.tier}">${p.tier}</span>
-                <span style="font-size:0.85rem; color:#94a3b8; margin-left:8px;">${p.duration_sec}s</span>
+                <span class="badge-tier tier-${p.tier}">${p.tier}</span>
+                <span style="color:var(--text-muted); font-size:0.85rem; margin-left:8px;">${p.duration_sec}s</span>
               </div>
             </div>
-            
-            <div class="quote-block">
-              <strong style="color:#818cf8;">⚡ Opening Hook (First 3s):</strong><br>
-              ${p.hook}
+
+            <div class="callout callout-hook">
+              <span class="callout-label">⚡ Opening Hook (First 3s)</span>
+              <div>${p.hook}</div>
             </div>
 
-            <div class="quote-block quote-cliff">
-              <strong style="color:#fbbf24;">🧗 Cliffhanger Cut Point:</strong><br>
-              ${p.cliffhanger}
+            <div class="callout callout-cliff">
+              <span class="callout-label">🧗 Cliffhanger Cut Point</span>
+              <div>${p.cliffhanger}</div>
             </div>
 
-            <p style="font-size:0.95rem; margin:0.75rem 0;"><strong>💡 Why It Works:</strong> ${p.why_it_works}</p>
+            <p style="font-size:0.95rem; margin:0.85rem 0;"><strong>💡 Why It Works:</strong> ${p.why_it_works}</p>
+            <p style="font-size:0.85rem; color:#94a3b8; font-style:italic;"><strong>🎯 Marketing Funnel Role:</strong> ${p.marketing_goal}</p>
 
-            <div class="scores-grid">
-              <div class="score-item">Final Score: <strong>${p.scores.final}</strong></div>
-              <div class="score-item">Hook: <strong>${p.scores.hook}</strong></div>
-              <div class="score-item">Cliffhanger: <strong>${p.scores.cliffhanger}</strong></div>
-              <div class="score-item">Clarity: <strong>${p.scores.clarity}</strong></div>
-              <div class="score-item">Intensity: <strong>${p.scores.intensity}</strong></div>
+            <div class="scores-row">
+              <span>Final Score: <strong>${p.scores.final}</strong></span>
+              <span>Hook: <strong>${p.scores.hook}</strong></span>
+              <span>Cliffhanger: <strong>${p.scores.cliffhanger}</strong></span>
+              <span>Clarity: <strong>${p.scores.clarity}</strong></span>
+              <span>Intensity: <strong>${p.scores.intensity}</strong></span>
             </div>
           </div>
         `;
       }).join('');
     }
 
-    function filterPromos() {
-      const tier = document.getElementById('tierFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
-
-      const filtered = allPromos.filter(p => {
-        const matchesTier = tier === 'ALL' || p.tier === tier;
-        const matchesSearch = `ep ${p.segments[0].episode}`.toLowerCase().includes(search);
-        return matchesTier && matchesSearch;
-      });
-
-      renderPromos(filtered);
-    }
-
-    loadPromos();
+    init();
   </script>
 </body>
 </html>
