@@ -37,9 +37,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 2,
@@ -78,9 +80,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART3",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 3: Pre-Climax Suspense (Eps 34\u201338)",
+    "campaign_role": "Pre-Climax Cliffhanger: High-stakes trial accusation cut right before the truth. Avoids the finale (Eps 39-50) to prevent spoilers."
   },
   {
     "rank": 3,
@@ -122,9 +126,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 4,
@@ -165,9 +171,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 5,
@@ -208,9 +216,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 6,
@@ -250,9 +260,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART1",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 7,
@@ -292,9 +304,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART1",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 8,
@@ -335,9 +349,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 9,
@@ -377,9 +393,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "START",
+    "phase": "PART1",
     "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)",
-    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."
+    "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 10,
@@ -420,9 +438,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 11,
@@ -462,9 +482,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 12,
@@ -504,9 +526,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART1",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 13,
@@ -547,9 +571,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART2",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 14,
@@ -589,9 +615,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 15,
@@ -630,9 +658,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 16,
@@ -672,9 +702,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 17,
@@ -715,9 +747,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART1",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 18,
@@ -759,9 +793,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   },
   {
     "rank": 19,
@@ -801,9 +837,11 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "MID",
+    "phase": "PART1",
     "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)",
-    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."
+    "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.",
+    "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)",
+    "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."
   },
   {
     "rank": 20,
@@ -842,8 +880,10 @@
       "clarity": [],
       "intensity": []
     },
-    "phase": "CLIMAX",
+    "phase": "PART2",
     "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)",
-    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."
+    "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.",
+    "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)",
+    "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."
   }
 ]

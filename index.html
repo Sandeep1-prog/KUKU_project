@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromoFinder — AI Microdrama Promo Director</title>
+  <title>PromoFinder — Microdrama 3-Part Campaign Director</title>
   <style>
     :root {
       --bg: #090d16;
       --card-bg: #131c2e;
       --accent: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.2);
+      --accent-glow: rgba(99, 102, 241, 0.25);
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --border: #23324d;
       --hook-color: #38bdf8;
       --cliff-color: #f59e0b;
-      --start-phase: #ec4899;
-      --mid-phase: #8b5cf6;
-      --climax-phase: #f59e0b;
+      --p1: #ec4899;
+      --p2: #8b5cf6;
+      --p3: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -30,7 +30,7 @@
     .container { max-width: 1150px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 2.5rem; }
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, #fff 40%, #94a3b8);
@@ -38,69 +38,45 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.5rem;
     }
-    p.subtitle { color: var(--text-muted); font-size: 1.15rem; max-width: 750px; margin: 0 auto; }
-    
-    /* Metrics banner */
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    .metric-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .metric-value { font-size: 2rem; font-weight: 800; color: #818cf8; }
-    .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.3rem; }
+    p.subtitle { color: var(--text-muted); font-size: 1.15rem; max-width: 800px; margin: 0 auto; }
 
-    /* Marketing Funnel Section */
     .funnel-container {
       background: linear-gradient(180deg, #162035 0%, #0d1524 100%);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
-      margin-bottom: 3rem;
+      margin: 2.5rem 0;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
     .funnel-header { text-align: center; margin-bottom: 1.75rem; }
-    .funnel-header h2 { font-size: 1.6rem; color: #fff; margin-bottom: 0.25rem; }
+    .funnel-header h2 { font-size: 1.6rem; color: #fff; margin-bottom: 0.35rem; }
     .funnel-header p { color: var(--text-muted); font-size: 0.95rem; }
+
     .funnel-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
     }
     .funnel-step {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.85);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
-      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .funnel-step.step-1 { border-top: 4px solid var(--start-phase); }
-    .funnel-step.step-2 { border-top: 4px solid var(--mid-phase); }
-    .funnel-step.step-3 { border-top: 4px solid var(--climax-phase); }
-    .step-tag {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .step-1 .step-tag { color: var(--start-phase); }
-    .step-2 .step-tag { color: var(--mid-phase); }
-    .step-3 .step-tag { color: var(--climax-phase); }
-    .step-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
-    .step-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
-    .step-box {
+    .step-1 { border-top: 4px solid var(--p1); }
+    .step-2 { border-top: 4px solid var(--p2); }
+    .step-3 { border-top: 4px solid var(--p3); }
+
+    .step-tag { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .step-1 .step-tag { color: var(--p1); }
+    .step-2 .step-tag { color: var(--p2); }
+    .step-3 .step-tag { color: var(--p3); }
+    .step-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+    .step-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .clip-card {
       background: #090d16;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
@@ -109,7 +85,6 @@
       margin-bottom: 0.75rem;
     }
 
-    /* Filters */
     .filter-bar {
       display: flex;
       justify-content: space-between;
@@ -127,7 +102,7 @@
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 0.45rem 1rem;
+      padding: 0.5rem 1.15rem;
       border-radius: 9999px;
       cursor: pointer;
       font-size: 0.9rem;
@@ -147,10 +122,9 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       font-size: 0.9rem;
-      min-width: 240px;
+      min-width: 250px;
     }
 
-    /* Promo Card List */
     .promo-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -158,7 +132,6 @@
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       transition: transform 0.15s ease, border-color 0.15s ease;
-      position: relative;
     }
     .promo-card:hover {
       border-color: #4f46e5;
@@ -183,17 +156,17 @@
     .tier-POST_FIRST { background: #064e3b; color: #34d399; border: 1px solid #059669; }
     .tier-STRONG { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
     .tier-BACKUP { background: #334155; color: #cbd5e1; border: 1px solid #475569; }
-    
+
     .phase-badge {
       font-size: 0.75rem;
-      padding: 0.2rem 0.5rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 6px;
       margin-left: 0.5rem;
       font-weight: 600;
     }
-    .phase-START { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
-    .phase-MID { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
-    .phase-CLIMAX { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .phase-PART1 { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+    .phase-PART2 { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+    .phase-PART3 { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
 
     .callout {
       background: #090d16;
@@ -224,83 +197,92 @@
 <body>
   <div class="container">
     <header>
-      <h1>🎬 PromoFinder: AI Promo Moment Selector</h1>
-      <p class="subtitle">Automated discovery, boundary snapping, and scoring of 20–60s viral promo clips across 50 microdrama episodes.</p>
+      <h1>🎬 PromoFinder: 3-Part Narrative Campaign</h1>
+      <p class="subtitle">Curated 20–60s promo clips across 50 episodes divided into 3 narrative thirds. Built to hook cold scrolling viewers, build rising tension, and cut on cliffhangers while strictly protecting the finale from spoilers.</p>
     </header>
 
-    <div class="metrics">
-      <div class="metric-card">
-        <div class="metric-value">50</div>
-        <div class="metric-label">Episodes Scanned</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-value">13,568</div>
-        <div class="metric-label">Raw Candidates</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-value">4.61s</div>
-        <div class="metric-label">Run Speed (CPU)</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-value">20</div>
-        <div class="metric-label">Top Ranked Promos</div>
-      </div>
-    </div>
-
-    <!-- NARRATIVE MARKETING FUNNEL -->
+    <!-- 3-PART SEQUENTIAL MARKETING FUNNEL -->
     <div class="funnel-container">
       <div class="funnel-header">
-        <h2>🔥 Recommended 3-Part Sequential Marketing Funnel</h2>
-        <p>Avoid posting out-of-order spoilers (e.g. Ep 34 right after Ep 1). Post promos in this narrative sequence to maximize viewer conversion into the app:</p>
+        <h2>🏆 The 3-Part Social Campaign Strategy (Start ➔ Mid ➔ Climax Cut)</h2>
+        <p>Post clips in this order across your marketing cycle to pull viewers from social feeds into downloading the app:</p>
       </div>
 
       <div class="funnel-grid">
-        <!-- Funnel 1: Start -->
+        <!-- PART 1: INITIAL HOOK -->
         <div class="funnel-step step-1">
           <div>
-            <div class="step-tag">Funnel 1 • Cold Hook (Start)</div>
-            <div class="step-title">Episode 1 (00:35 - 01:20)</div>
-            <div class="step-desc">Establish the heartbreaking betrayal at the altar without spoiling the Duke's true power.</div>
-            <div class="step-box">
-              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Juliana: <em>"Why are you holding her hand?"</em> / Sister: <em>"Because he is marrying me."</em>
+            <div class="step-tag">Part 1: The Inciting Betrayal (Eps 1–16)</div>
+            <div class="step-title">3 Initial Hook Clips</div>
+            <div class="step-desc">Establish the altar betrayal and family cruelty immediately. Zero backstory needed.</div>
+            
+            <div class="clip-card">
+              <strong>Clip 1 • Ep 1 (00:35 - 01:20):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> <em>"Why are you holding her hand?"</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> Juliana: <em>"Father..."</em> ➔ [Cut]
             </div>
-            <div class="step-box">
-              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> Juliana: <em>"Father..."</em> ➔ [Hard Cut]
+
+            <div class="clip-card">
+              <strong>Clip 2 • Ep 2 (00:00 - 00:34):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Groom: <em>"I cannot marry you, Juliana."</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> Pleading walk in the bridal gown.
+            </div>
+
+            <div class="clip-card">
+              <strong>Clip 3 • Ep 3 (00:13 - 00:43):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Sister: <em>"I didn't steal what was never yours."</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> Juliana: <em>"Leave where?!"</em> ➔ [Cut]
             </div>
           </div>
-          <p style="font-size:0.8rem; color:#f472b6; margin-top:0.5rem;"><strong>Goal:</strong> Grips cold viewers with pure injustice.</p>
+          <p style="font-size:0.8rem; color:#f472b6; margin-top:0.75rem;"><strong>Viewer Reaction:</strong> "How could her own family do that to her?!"</p>
         </div>
 
-        <!-- Funnel 2: Mid -->
+        <!-- PART 2: RISING ACTION -->
         <div class="funnel-step step-2">
           <div>
-            <div class="step-tag">Funnel 2 • Rising Action (Mid)</div>
-            <div class="step-title">Episode 15 (00:53 - 01:24)</div>
-            <div class="step-desc">Introduce the "broken soldier" husband standing up from his wheelchair to defend Juliana.</div>
-            <div class="step-box">
-              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Thugs harass Juliana over her mother's vintage plants.
+            <div class="step-tag">Part 2: Rising Action & Retribution (Eps 17–33)</div>
+            <div class="step-title">3 Mid-Story Rising Clips</div>
+            <div class="step-desc">Introduce the 'broken soldier' husband who is secretly a war hero, fighting back against the family.</div>
+            
+            <div class="clip-card">
+              <strong>Clip 4 • Ep 15 (00:53 - 01:24):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Thugs harass Juliana over mother's plants.<br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> <em>"What? You want to fight us, veteran?!"</em>
             </div>
-            <div class="step-box">
-              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> Thug: <em>"What? You want to fight us, veteran?!"</em> ➔ [Hard Cut]
+
+            <div class="clip-card">
+              <strong>Clip 5 • Ep 24 (00:30 - 01:09):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Noblewoman: <em>"Then let her suffer."</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> <em>"Do you want the same punishment?!"</em>
+            </div>
+
+            <div class="clip-card">
+              <strong>Clip 6 • Ep 28 (01:04 - 01:49):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Catherine: <em>"How convenient the poison exists..."</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> <em>"The bride who married a penniless veteran..."</em>
             </div>
           </div>
-          <p style="font-size:0.8rem; color:#a78bfa; margin-top:0.5rem;"><strong>Goal:</strong> Teases the warrior husband's true identity.</p>
+          <p style="font-size:0.8rem; color:#a78bfa; margin-top:0.75rem;"><strong>Viewer Reaction:</strong> "Her husband is about to reveal who he really is!"</p>
         </div>
 
-        <!-- Funnel 3: Climax -->
+        <!-- PART 3: PRE-CLIMAX CLIFFHANGER -->
         <div class="funnel-step step-3">
           <div>
-            <div class="step-tag">Funnel 3 • Climax Tease (Late)</div>
-            <div class="step-title">Episode 28 (01:04 - 01:49)</div>
-            <div class="step-desc">High stakes legal retribution & identity confrontation on the verge of magistrate investigation.</div>
-            <div class="step-box">
-              <strong style="color:var(--hook-color);">⚡ Hook:</strong> Catherine accuses Juliana of wedding a penniless veteran.
+            <div class="step-tag">Part 3: Pre-Climax Suspense (Eps 34–38)</div>
+            <div class="step-title">1 Pre-Climax Cliffhanger Clip</div>
+            <div class="step-desc">High stakes courtroom trial confrontation. Strictly avoids final episodes (39–50) to protect the climax!</div>
+            
+            <div class="clip-card">
+              <strong>Clip 7 • Ep 34 (00:37 - 01:17):</strong><br>
+              <span style="color:var(--hook-color);">⚡ Hook:</span> Judge: <em>"Prudence. You served beside the accused?"</em><br>
+              <span style="color:var(--cliff-color);">🧗 Cut:</span> Judge: <em>"And did she speak words you could not understand?!"</em> ➔ <strong>[HARD CUT TO APP DOWNLOAD SCREEN]</strong>
             </div>
-            <div class="step-box">
-              <strong style="color:var(--cliff-color);">🧗 Cut:</strong> <em>"Then perhaps you can explain every page to the magistrate!"</em> ➔ [Hard Cut]
+
+            <div style="background:rgba(245,158,11,0.1); border:1px dashed var(--cliff-color); border-radius:8px; padding:0.85rem; font-size:0.85rem; margin-top:0.75rem; color:#fde68a;">
+              🛡️ <strong>Spoiler Shield Active:</strong> Episodes 39–50 (the final battle and marriage resolution) are intentionally omitted from promo rotation so users must download the app to see how it ends!
             </div>
           </div>
-          <p style="font-size:0.8rem; color:#fbbf24; margin-top:0.5rem;"><strong>Goal:</strong> Drives app installs to witness the courtroom reveal.</p>
+          <p style="font-size:0.8rem; color:#fbbf24; margin-top:0.75rem;"><strong>Viewer Reaction:</strong> "I have to download the app right now to see the trial!"</p>
         </div>
       </div>
     </div>
@@ -309,12 +291,12 @@
     <div class="filter-bar">
       <div class="filter-pills">
         <button class="filter-btn active" onclick="setPhase('ALL')">All Promos (20)</button>
-        <button class="filter-btn" onclick="setPhase('START')">🌸 Start Arc (Eps 1–3)</button>
-        <button class="filter-btn" onclick="setPhase('MID')">⚔️ Mid Arc (Eps 5–20)</button>
-        <button class="filter-btn" onclick="setPhase('CLIMAX')">⚖️ Climax Arc (Eps 24+)</button>
+        <button class="filter-btn" onclick="setPhase('PART1')">🌸 Part 1: Hooks (Eps 1–16)</button>
+        <button class="filter-btn" onclick="setPhase('PART2')">⚔️ Part 2: Rising Action (Eps 17–33)</button>
+        <button class="filter-btn" onclick="setPhase('PART3')">⚖️ Part 3: Pre-Climax (Eps 34–38)</button>
       </div>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search episode or keyword..." onkeyup="renderFiltered()">
+        <input type="text" id="searchInput" placeholder="Search episode or dialogue..." onkeyup="renderFiltered()">
       </div>
     </div>
 
@@ -323,22 +305,15 @@
   </div>
 
   <script>
-    let promosData = [];
+    const embeddedPromos = [{"rank": 1, "tier": "POST_FIRST", "id": "3c4ad94c512e", "type": "SINGLE", "duration_sec": 45.35, "segments": [{"episode": 1, "start": "00:35.15", "end": "01:20.50", "start_sec": 35.15, "end_sec": 80.5}], "hook": "LADY JULIANA: \"Why are you holding her hand?\" / LADY IN GOLD GOWN: \"Because he is marrying me.\"", "cliffhanger": "LADY JULIANA: \"Father...\"", "why_it_works": "High confrontation hook (0.85 emotion); cuts on unresolved line 'Father......'.", "scores": {"hook": 0.77, "cliffhanger": 0.47, "clarity": 0.79, "intensity": 0.72, "spoiler_risk": 0.0, "final": 0.61}, "evidence": {"hook": ["word:why", "word:holding her hand", "tag:Heartbroken"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 2, "tier": "POST_FIRST", "id": "63eb06121218", "type": "SINGLE", "duration_sec": 40.25, "segments": [{"episode": 34, "start": "00:37.25", "end": "01:17.50", "start_sec": 37.25, "end_sec": 77.5}], "hook": "JUDGE: \"Prudence. You served beside the accused?\" / PRUDENCE: \"Yes, Your Honor.\"", "cliffhanger": "JUDGE: \"And did she speak words you could not understand?\"", "why_it_works": "High confrontation hook (0.75 emotion); cuts on unresolved line 'And did she speak words you could n...'.", "scores": {"hook": 0.7, "cliffhanger": 0.55, "clarity": 0.79, "intensity": 0.63, "spoiler_risk": 0.33, "final": 0.574}, "evidence": {"hook": ["tag:Commanding", "action:strikes"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART3", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 3: Pre-Climax Suspense (Eps 34\u201338)", "campaign_role": "Pre-Climax Cliffhanger: High-stakes trial accusation cut right before the truth. Avoids the finale (Eps 39-50) to prevent spoilers."}, {"rank": 3, "tier": "POST_FIRST", "id": "8c306910debd", "type": "SINGLE", "duration_sec": 34.2, "segments": [{"episode": 2, "start": "00:00.00", "end": "00:34.20", "start_sec": 0.0, "end_sec": 34.2}], "hook": "THE FORMER GROOM: \"I cannot marry you, Juliana.\"", "cliffhanger": "LADY JULIANA (Off-screen) (Vulnerable, Begging): \"Father...\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'Father......'.", "scores": {"hook": 0.78, "cliffhanger": 0.54, "clarity": 0.41, "intensity": 0.58, "spoiler_risk": 0.0, "final": 0.567}, "evidence": {"hook": ["word:marry", "tag:Cold", "tag:Callous", "action:gasps", "action:tears"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 4, "tier": "POST_FIRST", "id": "79b95eb4493b", "type": "SINGLE", "duration_sec": 29.75, "segments": [{"episode": 3, "start": "00:13.55", "end": "00:43.30", "start_sec": 13.55, "end_sec": 43.3}], "hook": "LADY IN GOLD GOWN: \"I didn't steal what was never truly yours.\" / LADY JULIANA: \"This was my wedding.\"", "cliffhanger": "LADY JULIANA: \"Leave where?\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'Leave where?...'.", "scores": {"hook": 0.68, "cliffhanger": 0.48, "clarity": 0.67, "intensity": 0.67, "spoiler_risk": 0.0, "final": 0.565}, "evidence": {"hook": ["word:what", "word:never", "tag:Smug", "tag:Malicious"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 5, "tier": "POST_FIRST", "id": "f2aaeab0b219", "type": "SINGLE", "duration_sec": 30.85, "segments": [{"episode": 2, "start": "00:47.55", "end": "01:18.40", "start_sec": 47.55, "end_sec": 78.4}], "hook": "LADY IN GOLD GOWN: \"Why are you surprised, sister? Look at you.\" / LADY IN GOLD GOWN (Off-screen) (Scornful): \"That plain, old-fashioned gown.\"", "cliffhanger": "LADY JULIANA: \"You abandoned a woman who trusted you...\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'You abandoned a woman who trusted y...'.", "scores": {"hook": 0.74, "cliffhanger": 0.46, "clarity": 0.58, "intensity": 0.59, "spoiler_risk": 0.0, "final": 0.557}, "evidence": {"hook": ["word:why", "word:look at", "tag:Mocking", "tag:Spiteful"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 6, "tier": "STRONG", "id": "a48853bd925d", "type": "EP_END", "duration_sec": 31.15, "segments": [{"episode": 15, "start": "00:53.25", "end": "01:24.40", "start_sec": 53.25, "end_sec": 84.4}], "hook": "JULIANA: \"My mother's plants...\" / BALD THUG: \"Look at her! Crying over weeds!\"", "cliffhanger": "THUG WITH CAP: \"What? You want to fight us, veteran?\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'What? You want to fight us, veteran...'.", "scores": {"hook": 0.63, "cliffhanger": 0.61, "clarity": 0.44, "intensity": 0.63, "spoiler_risk": 0.0, "final": 0.551}, "evidence": {"hook": ["tag:Broken", "tag:Sobbing", "action:blood"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 7, "tier": "STRONG", "id": "2c784e4f366c", "type": "SINGLE", "duration_sec": 36.1, "segments": [{"episode": 7, "start": "00:32.80", "end": "01:08.90", "start_sec": 32.8, "end_sec": 68.9}], "hook": "ARISTOCRATIC WOMAN: \"Home? Look at your hands, Juliana.\"", "cliffhanger": "GERALD: \"And your husband?\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'And your husband?...'.", "scores": {"hook": 0.64, "cliffhanger": 0.48, "clarity": 0.58, "intensity": 0.7, "spoiler_risk": 0.0, "final": 0.544}, "evidence": {"hook": ["word:look at", "tag:Gloating", "tag:Mocking"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 8, "tier": "STRONG", "id": "496b1bf37a43", "type": "SINGLE", "duration_sec": 32.4, "segments": [{"episode": 1, "start": "01:14.60", "end": "01:47.00", "start_sec": 74.6, "end_sec": 107.0}], "hook": "LADY IN GOLD GOWN: \"Long enough to know he was never going to marry you.\" / LADY JULIANA: \"Father...\"", "cliffhanger": "LADY JULIANA: \"And I am what?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'And I am what?...'.", "scores": {"hook": 0.66, "cliffhanger": 0.43, "clarity": 0.67, "intensity": 0.6, "spoiler_risk": 0.0, "final": 0.54}, "evidence": {"hook": ["word:marry", "word:never", "tag:Cruel", "tag:Poised"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 9, "tier": "STRONG", "id": "2b27310e9dea", "type": "SINGLE", "duration_sec": 39.05, "segments": [{"episode": 3, "start": "00:41.85", "end": "01:20.90", "start_sec": 41.85, "end_sec": 80.9}], "hook": "NOBLE MATRIARCH: \"You leave.\" / LADY JULIANA: \"Leave where?\"", "cliffhanger": "THE BEARDED STRANGER: \"I said...\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'I said......'.", "scores": {"hook": 0.63, "cliffhanger": 0.46, "clarity": 0.58, "intensity": 0.61, "spoiler_risk": 0.0, "final": 0.528}, "evidence": {"hook": ["word:leave", "tag:Cold", "tag:Heartless"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 10, "tier": "STRONG", "id": "4db6bcd22af8", "type": "SINGLE", "duration_sec": 45.15, "segments": [{"episode": 28, "start": "01:04.65", "end": "01:49.80", "start_sec": 64.65, "end_sec": 109.8}], "hook": "CATHERINE: \"How convenient that the only person who can prove the poison exists...\"", "cliffhanger": "CATHERINE: \"The bride who married a penniless war veteran...\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'The bride who married a penniless w...'.", "scores": {"hook": 0.65, "cliffhanger": 0.45, "clarity": 0.7, "intensity": 0.65, "spoiler_risk": 0.22, "final": 0.528}, "evidence": {"hook": ["word:who", "word:poison", "tag:Amused", "tag:Mocking"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 11, "tier": "STRONG", "id": "825717b1566e", "type": "SINGLE", "duration_sec": 38.75, "segments": [{"episode": 24, "start": "00:30.75", "end": "01:09.50", "start_sec": 30.75, "end_sec": 69.5}], "hook": "NOBLEWOMAN: \"Then let her suffer.\" / LADY JULIANA: \"I cannot do that.\"", "cliffhanger": "NOBLEWOMAN: \"Do you want the same punishment?\"", "why_it_works": "High confrontation hook (0.85 emotion); cuts on unresolved line 'Do you want the same punishment?...'.", "scores": {"hook": 0.72, "cliffhanger": 0.49, "clarity": 0.44, "intensity": 0.63, "spoiler_risk": 0.15, "final": 0.527}, "evidence": {"hook": ["tag:Vicious", "tag:Venomous", "action:strikes"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 12, "tier": "STRONG", "id": "79948e1e9f00", "type": "SINGLE", "duration_sec": 28.85, "segments": [{"episode": 5, "start": "00:15.75", "end": "00:44.60", "start_sec": 15.75, "end_sec": 44.6}], "hook": "LORD ASHCROFT: \"Then leave as his wife.\"", "cliffhanger": "LADY ASHCROFT: \"And the ledger...\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'And the ledger......'.", "scores": {"hook": 0.58, "cliffhanger": 0.43, "clarity": 0.79, "intensity": 0.55, "spoiler_risk": 0.0, "final": 0.525}, "evidence": {"hook": ["word:leave", "tag:Harsh", "tag:Final"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 13, "tier": "STRONG", "id": "e745c766ed3f", "type": "SINGLE", "duration_sec": 22.05, "segments": [{"episode": 20, "start": "00:15.15", "end": "00:37.20", "start_sec": 15.15, "end_sec": 37.2}], "hook": "CATHERINE: \"Practically' is a word for beggars. I do not marry a practical Duke.\"", "cliffhanger": "CATHERINE: \"How much longer can the frail thing survive?\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'How much longer can the frail thing...'.", "scores": {"hook": 0.64, "cliffhanger": 0.46, "clarity": 0.76, "intensity": 0.59, "spoiler_risk": 0.09, "final": 0.525}, "evidence": {"hook": ["word:marry", "word:duke", "tag:Cold", "tag:Haughty"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 14, "tier": "STRONG", "id": "42d84519eb54", "type": "SINGLE", "duration_sec": 43.85, "segments": [{"episode": 31, "start": "00:06.65", "end": "00:50.50", "start_sec": 6.65, "end_sec": 50.5}], "hook": "CATHERINE: \"Look at you.\"", "cliffhanger": "CATHERINE: \"Do you remember?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Do you remember?...'.", "scores": {"hook": 0.65, "cliffhanger": 0.44, "clarity": 0.76, "intensity": 0.6, "spoiler_risk": 0.27, "final": 0.525}, "evidence": {"hook": ["word:look at", "tag:Cruel", "tag:Condescending"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 15, "tier": "STRONG", "id": "759a233886e9", "type": "SINGLE", "duration_sec": 25.2, "segments": [{"episode": 28, "start": "01:47.80", "end": "02:13.00", "start_sec": 107.8, "end_sec": 133.0}], "hook": "CATHERINE: \"The bride who married a penniless war veteran...\"", "cliffhanger": "CATHERINE: \"Then perhaps you can explain every page to the magistrate...\"", "why_it_works": "High confrontation hook (0.75 emotion); cuts on unresolved line 'Then perhaps you can explain every ...'.", "scores": {"hook": 0.65, "cliffhanger": 0.47, "clarity": 0.7, "intensity": 0.67, "spoiler_risk": 0.22, "final": 0.524}, "evidence": {"hook": ["word:who", "tag:Taunting"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 16, "tier": "BACKUP", "id": "1df8e2cd512b", "type": "SINGLE", "duration_sec": 59.45, "segments": [{"episode": 32, "start": "00:18.55", "end": "01:18.00", "start_sec": 18.55, "end_sec": 78.0}], "hook": "CATHERINE: \"Say goodbye to your mother.\" / JULIANA: \"Burn it.\"", "cliffhanger": "CATHERINE: \"Your soldier?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Your soldier?...'.", "scores": {"hook": 0.7, "cliffhanger": 0.44, "clarity": 0.79, "intensity": 0.65, "spoiler_risk": 0.29, "final": 0.522}, "evidence": {"hook": ["tag:Cruel", "tag:Final", "action:tears"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 17, "tier": "BACKUP", "id": "4899b89424d6", "type": "SINGLE", "duration_sec": 24.95, "segments": [{"episode": 15, "start": "00:08.25", "end": "00:33.20", "start_sec": 8.25, "end_sec": 33.2}], "hook": "JULIANA: \"Stop! What are you doing?!\" / THUG WITH CAP: \"We're clearing this rubbish.\"", "cliffhanger": "TALL THUG: \"Months? You actually spend your days growing this filth?\"", "why_it_works": "High confrontation hook (0.81 emotion); cuts on unresolved line 'Months? You actually spend your day...'.", "scores": {"hook": 0.76, "cliffhanger": 0.53, "clarity": 0.18, "intensity": 0.63, "spoiler_risk": 0.0, "final": 0.514}, "evidence": {"hook": ["word:what", "word:stop", "tag:Desperate", "tag:Alarmed"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 18, "tier": "BACKUP", "id": "1fa564783b44", "type": "SINGLE", "duration_sec": 35.7, "segments": [{"episode": 32, "start": "01:17.50", "end": "01:53.20", "start_sec": 77.5, "end_sec": 113.2}], "hook": "JULIANA: \"I was freed. And I found a man who never asked me what I was worth.\" / CATHERINE: \"Your soldier?\"", "cliffhanger": "JULIANA: \"You have spent your whole life collecting things that make people bow...\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'You have spent your whole life coll...'.", "scores": {"hook": 0.64, "cliffhanger": 0.43, "clarity": 0.67, "intensity": 0.65, "spoiler_risk": 0.29, "final": 0.508}, "evidence": {"hook": ["word:who", "word:what", "word:never", "tag:Grounded", "tag:Powerful"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}, {"rank": 19, "tier": "BACKUP", "id": "9eb992434a2b", "type": "SINGLE", "duration_sec": 47.85, "segments": [{"episode": 13, "start": "00:05.15", "end": "00:53.00", "start_sec": 5.15, "end_sec": 53.0}], "hook": "ALEXANDER: \"Juliana, look at those thorns. You cannot do this.\" / JULIANA: \"I must.\"", "cliffhanger": "ALEXANDER: \"Please...\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Please......'.", "scores": {"hook": 0.56, "cliffhanger": 0.47, "clarity": 0.55, "intensity": 0.66, "spoiler_risk": 0.0, "final": 0.503}, "evidence": {"hook": ["word:look at", "tag:Pleading", "tag:Agonized"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART1", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior.", "phase_name": "Part 1: Initial Hook & Betrayal (Eps 1\u201316)", "campaign_role": "Top-of-Funnel Hook: 1-second cold hook (abandoned at the altar, sister betrayal) to stop scrolling."}, {"rank": 20, "tier": "BACKUP", "id": "b4d5e48db45d", "type": "SINGLE", "duration_sec": 39.75, "segments": [{"episode": 33, "start": "00:02.25", "end": "00:42.00", "start_sec": 2.25, "end_sec": 42.0}], "hook": "LORD: \"Your brother is breathing again.\" / MAID: \"Yes, my Lord.\"", "cliffhanger": "LORD: \"Did she use her mother's book?\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'Did she use her mother's book?...'.", "scores": {"hook": 0.53, "cliffhanger": 0.53, "clarity": 0.7, "intensity": 0.61, "spoiler_risk": 0.31, "final": 0.503}, "evidence": {"hook": ["tag:Cold", "tag:Authoritative"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "PART2", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered.", "phase_name": "Part 2: Rising Action & Retribution (Eps 17\u201333)", "campaign_role": "Mid-Funnel Retribution: Conflict intensifies, marriage to the crippled soldier, and fighting back."}];
+    let promosData = embeddedPromos;
     let currentPhase = 'ALL';
-
-    // Fallback embedded data if fetched from file fails
-    const embeddedPromos = [{"rank": 1, "tier": "POST_FIRST", "id": "3c4ad94c512e", "type": "SINGLE", "duration_sec": 45.35, "segments": [{"episode": 1, "start": "00:35.15", "end": "01:20.50", "start_sec": 35.15, "end_sec": 80.5}], "hook": "LADY JULIANA: \"Why are you holding her hand?\" / LADY IN GOLD GOWN: \"Because he is marrying me.\"", "cliffhanger": "LADY JULIANA: \"Father...\"", "why_it_works": "High confrontation hook (0.85 emotion); cuts on unresolved line 'Father......'.", "scores": {"hook": 0.77, "cliffhanger": 0.47, "clarity": 0.79, "intensity": 0.72, "spoiler_risk": 0.0, "final": 0.61}, "evidence": {"hook": ["word:why", "word:holding her hand", "tag:Heartbroken"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 2, "tier": "POST_FIRST", "id": "63eb06121218", "type": "SINGLE", "duration_sec": 40.25, "segments": [{"episode": 34, "start": "00:37.25", "end": "01:17.50", "start_sec": 37.25, "end_sec": 77.5}], "hook": "JUDGE: \"Prudence. You served beside the accused?\" / PRUDENCE: \"Yes, Your Honor.\"", "cliffhanger": "JUDGE: \"And did she speak words you could not understand?\"", "why_it_works": "High confrontation hook (0.75 emotion); cuts on unresolved line 'And did she speak words you could n...'.", "scores": {"hook": 0.7, "cliffhanger": 0.55, "clarity": 0.79, "intensity": 0.63, "spoiler_risk": 0.33, "final": 0.574}, "evidence": {"hook": ["tag:Commanding", "action:strikes"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 3, "tier": "POST_FIRST", "id": "8c306910debd", "type": "SINGLE", "duration_sec": 34.2, "segments": [{"episode": 2, "start": "00:00.00", "end": "00:34.20", "start_sec": 0.0, "end_sec": 34.2}], "hook": "THE FORMER GROOM: \"I cannot marry you, Juliana.\"", "cliffhanger": "LADY JULIANA (Off-screen) (Vulnerable, Begging): \"Father...\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'Father......'.", "scores": {"hook": 0.78, "cliffhanger": 0.54, "clarity": 0.41, "intensity": 0.58, "spoiler_risk": 0.0, "final": 0.567}, "evidence": {"hook": ["word:marry", "tag:Cold", "tag:Callous", "action:gasps", "action:tears"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 4, "tier": "POST_FIRST", "id": "79b95eb4493b", "type": "SINGLE", "duration_sec": 29.75, "segments": [{"episode": 3, "start": "00:13.55", "end": "00:43.30", "start_sec": 13.55, "end_sec": 43.3}], "hook": "LADY IN GOLD GOWN: \"I didn't steal what was never truly yours.\" / LADY JULIANA: \"This was my wedding.\"", "cliffhanger": "LADY JULIANA: \"Leave where?\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'Leave where?...'.", "scores": {"hook": 0.68, "cliffhanger": 0.48, "clarity": 0.67, "intensity": 0.67, "spoiler_risk": 0.0, "final": 0.565}, "evidence": {"hook": ["word:what", "word:never", "tag:Smug", "tag:Malicious"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 5, "tier": "POST_FIRST", "id": "f2aaeab0b219", "type": "SINGLE", "duration_sec": 30.85, "segments": [{"episode": 2, "start": "00:47.55", "end": "01:18.40", "start_sec": 47.55, "end_sec": 78.4}], "hook": "LADY IN GOLD GOWN: \"Why are you surprised, sister? Look at you.\" / LADY IN GOLD GOWN (Off-screen) (Scornful): \"That plain, old-fashioned gown.\"", "cliffhanger": "LADY JULIANA: \"You abandoned a woman who trusted you...\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'You abandoned a woman who trusted y...'.", "scores": {"hook": 0.74, "cliffhanger": 0.46, "clarity": 0.58, "intensity": 0.59, "spoiler_risk": 0.0, "final": 0.557}, "evidence": {"hook": ["word:why", "word:look at", "tag:Mocking", "tag:Spiteful"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 6, "tier": "STRONG", "id": "a48853bd925d", "type": "EP_END", "duration_sec": 31.15, "segments": [{"episode": 15, "start": "00:53.25", "end": "01:24.40", "start_sec": 53.25, "end_sec": 84.4}], "hook": "JULIANA: \"My mother's plants...\" / BALD THUG: \"Look at her! Crying over weeds!\"", "cliffhanger": "THUG WITH CAP: \"What? You want to fight us, veteran?\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'What? You want to fight us, veteran...'.", "scores": {"hook": 0.63, "cliffhanger": 0.61, "clarity": 0.44, "intensity": 0.63, "spoiler_risk": 0.0, "final": 0.551}, "evidence": {"hook": ["tag:Broken", "tag:Sobbing", "action:blood"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 7, "tier": "STRONG", "id": "2c784e4f366c", "type": "SINGLE", "duration_sec": 36.1, "segments": [{"episode": 7, "start": "00:32.80", "end": "01:08.90", "start_sec": 32.8, "end_sec": 68.9}], "hook": "ARISTOCRATIC WOMAN: \"Home? Look at your hands, Juliana.\"", "cliffhanger": "GERALD: \"And your husband?\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'And your husband?...'.", "scores": {"hook": 0.64, "cliffhanger": 0.48, "clarity": 0.58, "intensity": 0.7, "spoiler_risk": 0.0, "final": 0.544}, "evidence": {"hook": ["word:look at", "tag:Gloating", "tag:Mocking"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 8, "tier": "STRONG", "id": "496b1bf37a43", "type": "SINGLE", "duration_sec": 32.4, "segments": [{"episode": 1, "start": "01:14.60", "end": "01:47.00", "start_sec": 74.6, "end_sec": 107.0}], "hook": "LADY IN GOLD GOWN: \"Long enough to know he was never going to marry you.\" / LADY JULIANA: \"Father...\"", "cliffhanger": "LADY JULIANA: \"And I am what?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'And I am what?...'.", "scores": {"hook": 0.66, "cliffhanger": 0.43, "clarity": 0.67, "intensity": 0.6, "spoiler_risk": 0.0, "final": 0.54}, "evidence": {"hook": ["word:marry", "word:never", "tag:Cruel", "tag:Poised"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 9, "tier": "STRONG", "id": "2b27310e9dea", "type": "SINGLE", "duration_sec": 39.05, "segments": [{"episode": 3, "start": "00:41.85", "end": "01:20.90", "start_sec": 41.85, "end_sec": 80.9}], "hook": "NOBLE MATRIARCH: \"You leave.\" / LADY JULIANA: \"Leave where?\"", "cliffhanger": "THE BEARDED STRANGER: \"I said...\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'I said......'.", "scores": {"hook": 0.63, "cliffhanger": 0.46, "clarity": 0.58, "intensity": 0.61, "spoiler_risk": 0.0, "final": 0.528}, "evidence": {"hook": ["word:leave", "tag:Cold", "tag:Heartless"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "START", "phase_title": "Phase 1: The Inciting Betrayal (Eps 1\u20133)", "marketing_goal": "Cold hook: establish the humiliation & sister betrayal at the altar without spoiling the Duke's true strength."}, {"rank": 10, "tier": "STRONG", "id": "4db6bcd22af8", "type": "SINGLE", "duration_sec": 45.15, "segments": [{"episode": 28, "start": "01:04.65", "end": "01:49.80", "start_sec": 64.65, "end_sec": 109.8}], "hook": "CATHERINE: \"How convenient that the only person who can prove the poison exists...\"", "cliffhanger": "CATHERINE: \"The bride who married a penniless war veteran...\"", "why_it_works": "High confrontation hook (0.72 emotion); cuts on unresolved line 'The bride who married a penniless w...'.", "scores": {"hook": 0.65, "cliffhanger": 0.45, "clarity": 0.7, "intensity": 0.65, "spoiler_risk": 0.22, "final": 0.528}, "evidence": {"hook": ["word:who", "word:poison", "tag:Amused", "tag:Mocking"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 11, "tier": "STRONG", "id": "825717b1566e", "type": "SINGLE", "duration_sec": 38.75, "segments": [{"episode": 24, "start": "00:30.75", "end": "01:09.50", "start_sec": 30.75, "end_sec": 69.5}], "hook": "NOBLEWOMAN: \"Then let her suffer.\" / LADY JULIANA: \"I cannot do that.\"", "cliffhanger": "NOBLEWOMAN: \"Do you want the same punishment?\"", "why_it_works": "High confrontation hook (0.85 emotion); cuts on unresolved line 'Do you want the same punishment?...'.", "scores": {"hook": 0.72, "cliffhanger": 0.49, "clarity": 0.44, "intensity": 0.63, "spoiler_risk": 0.15, "final": 0.527}, "evidence": {"hook": ["tag:Vicious", "tag:Venomous", "action:strikes"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 12, "tier": "STRONG", "id": "79948e1e9f00", "type": "SINGLE", "duration_sec": 28.85, "segments": [{"episode": 5, "start": "00:15.75", "end": "00:44.60", "start_sec": 15.75, "end_sec": 44.6}], "hook": "LORD ASHCROFT: \"Then leave as his wife.\"", "cliffhanger": "LADY ASHCROFT: \"And the ledger...\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'And the ledger......'.", "scores": {"hook": 0.58, "cliffhanger": 0.43, "clarity": 0.79, "intensity": 0.55, "spoiler_risk": 0.0, "final": 0.525}, "evidence": {"hook": ["word:leave", "tag:Harsh", "tag:Final"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 13, "tier": "STRONG", "id": "e745c766ed3f", "type": "SINGLE", "duration_sec": 22.05, "segments": [{"episode": 20, "start": "00:15.15", "end": "00:37.20", "start_sec": 15.15, "end_sec": 37.2}], "hook": "CATHERINE: \"Practically' is a word for beggars. I do not marry a practical Duke.\"", "cliffhanger": "CATHERINE: \"How much longer can the frail thing survive?\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'How much longer can the frail thing...'.", "scores": {"hook": 0.64, "cliffhanger": 0.46, "clarity": 0.76, "intensity": 0.59, "spoiler_risk": 0.09, "final": 0.525}, "evidence": {"hook": ["word:marry", "word:duke", "tag:Cold", "tag:Haughty"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 14, "tier": "STRONG", "id": "42d84519eb54", "type": "SINGLE", "duration_sec": 43.85, "segments": [{"episode": 31, "start": "00:06.65", "end": "00:50.50", "start_sec": 6.65, "end_sec": 50.5}], "hook": "CATHERINE: \"Look at you.\"", "cliffhanger": "CATHERINE: \"Do you remember?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Do you remember?...'.", "scores": {"hook": 0.65, "cliffhanger": 0.44, "clarity": 0.76, "intensity": 0.6, "spoiler_risk": 0.27, "final": 0.525}, "evidence": {"hook": ["word:look at", "tag:Cruel", "tag:Condescending"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 15, "tier": "STRONG", "id": "759a233886e9", "type": "SINGLE", "duration_sec": 25.2, "segments": [{"episode": 28, "start": "01:47.80", "end": "02:13.00", "start_sec": 107.8, "end_sec": 133.0}], "hook": "CATHERINE: \"The bride who married a penniless war veteran...\"", "cliffhanger": "CATHERINE: \"Then perhaps you can explain every page to the magistrate...\"", "why_it_works": "High confrontation hook (0.75 emotion); cuts on unresolved line 'Then perhaps you can explain every ...'.", "scores": {"hook": 0.65, "cliffhanger": 0.47, "clarity": 0.7, "intensity": 0.67, "spoiler_risk": 0.22, "final": 0.524}, "evidence": {"hook": ["word:who", "tag:Taunting"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 16, "tier": "BACKUP", "id": "1df8e2cd512b", "type": "SINGLE", "duration_sec": 59.45, "segments": [{"episode": 32, "start": "00:18.55", "end": "01:18.00", "start_sec": 18.55, "end_sec": 78.0}], "hook": "CATHERINE: \"Say goodbye to your mother.\" / JULIANA: \"Burn it.\"", "cliffhanger": "CATHERINE: \"Your soldier?\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Your soldier?...'.", "scores": {"hook": 0.7, "cliffhanger": 0.44, "clarity": 0.79, "intensity": 0.65, "spoiler_risk": 0.29, "final": 0.522}, "evidence": {"hook": ["tag:Cruel", "tag:Final", "action:tears"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 17, "tier": "BACKUP", "id": "4899b89424d6", "type": "SINGLE", "duration_sec": 24.95, "segments": [{"episode": 15, "start": "00:08.25", "end": "00:33.20", "start_sec": 8.25, "end_sec": 33.2}], "hook": "JULIANA: \"Stop! What are you doing?!\" / THUG WITH CAP: \"We're clearing this rubbish.\"", "cliffhanger": "TALL THUG: \"Months? You actually spend your days growing this filth?\"", "why_it_works": "High confrontation hook (0.81 emotion); cuts on unresolved line 'Months? You actually spend your day...'.", "scores": {"hook": 0.76, "cliffhanger": 0.53, "clarity": 0.18, "intensity": 0.63, "spoiler_risk": 0.0, "final": 0.514}, "evidence": {"hook": ["word:what", "word:stop", "tag:Desperate", "tag:Alarmed"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 18, "tier": "BACKUP", "id": "1fa564783b44", "type": "SINGLE", "duration_sec": 35.7, "segments": [{"episode": 32, "start": "01:17.50", "end": "01:53.20", "start_sec": 77.5, "end_sec": 113.2}], "hook": "JULIANA: \"I was freed. And I found a man who never asked me what I was worth.\" / CATHERINE: \"Your soldier?\"", "cliffhanger": "JULIANA: \"You have spent your whole life collecting things that make people bow...\"", "why_it_works": "High confrontation hook (0.40 emotion); cuts on unresolved line 'You have spent your whole life coll...'.", "scores": {"hook": 0.64, "cliffhanger": 0.43, "clarity": 0.67, "intensity": 0.65, "spoiler_risk": 0.29, "final": 0.508}, "evidence": {"hook": ["word:who", "word:what", "word:never", "tag:Grounded", "tag:Powerful"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}, {"rank": 19, "tier": "BACKUP", "id": "9eb992434a2b", "type": "SINGLE", "duration_sec": 47.85, "segments": [{"episode": 13, "start": "00:05.15", "end": "00:53.00", "start_sec": 5.15, "end_sec": 53.0}], "hook": "ALEXANDER: \"Juliana, look at those thorns. You cannot do this.\" / JULIANA: \"I must.\"", "cliffhanger": "ALEXANDER: \"Please...\"", "why_it_works": "High confrontation hook (0.76 emotion); cuts on unresolved line 'Please......'.", "scores": {"hook": 0.56, "cliffhanger": 0.47, "clarity": 0.55, "intensity": 0.66, "spoiler_risk": 0.0, "final": 0.503}, "evidence": {"hook": ["word:look at", "tag:Pleading", "tag:Agonized"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "MID", "phase_title": "Phase 2: The Broken Soldier's Defense (Eps 5\u201320)", "marketing_goal": "Rising action: the 'crippled' veteran stands up to thugs and defends Juliana, proving he is a warrior."}, {"rank": 20, "tier": "BACKUP", "id": "b4d5e48db45d", "type": "SINGLE", "duration_sec": 39.75, "segments": [{"episode": 33, "start": "00:02.25", "end": "00:42.00", "start_sec": 2.25, "end_sec": 42.0}], "hook": "LORD: \"Your brother is breathing again.\" / MAID: \"Yes, my Lord.\"", "cliffhanger": "LORD: \"Did she use her mother's book?\"", "why_it_works": "High confrontation hook (0.67 emotion); cuts on unresolved line 'Did she use her mother's book?...'.", "scores": {"hook": 0.53, "cliffhanger": 0.53, "clarity": 0.7, "intensity": 0.61, "spoiler_risk": 0.31, "final": 0.503}, "evidence": {"hook": ["tag:Cold", "tag:Authoritative"], "cliffhanger": ["punctuation:unresolved"], "clarity": [], "intensity": []}, "phase": "CLIMAX", "phase_title": "Phase 3: The Retribution & Identity Tease (Eps 24\u201334)", "marketing_goal": "Climax tease: courtroom stakes and identity revelation cut right before the truth is uncovered."}];
-
-    function init() {
-      promosData = embeddedPromos;
-      renderFiltered();
-    }
 
     function setPhase(phase) {
       currentPhase = phase;
       document.querySelectorAll('.filter-btn').forEach(b => {
         b.classList.remove('active');
-        if (b.innerText.toLowerCase().includes(phase.toLowerCase()) || (phase === 'ALL' && b.innerText.includes('All'))) {
+        if (b.innerText.includes(phase) || (phase === 'ALL' && b.innerText.includes('All'))) {
           b.classList.add('active');
         }
       });
@@ -368,7 +343,7 @@
             <div class="card-top">
               <div class="card-title">
                 Rank #${p.rank} — Episode ${s.episode} (${s.start} to ${s.end})
-                <span class="phase-badge phase-${p.phase}">${p.phase_title.split(':')[0]}</span>
+                <span class="phase-badge phase-${p.phase}">${p.phase_name.split(':')[0]}</span>
               </div>
               <div>
                 <span class="badge-tier tier-${p.tier}">${p.tier}</span>
@@ -387,7 +362,7 @@
             </div>
 
             <p style="font-size:0.95rem; margin:0.85rem 0;"><strong>💡 Why It Works:</strong> ${p.why_it_works}</p>
-            <p style="font-size:0.85rem; color:#94a3b8; font-style:italic;"><strong>🎯 Marketing Funnel Role:</strong> ${p.marketing_goal}</p>
+            <p style="font-size:0.85rem; color:#94a3b8; font-style:italic;"><strong>🎯 Campaign Role:</strong> ${p.campaign_role}</p>
 
             <div class="scores-row">
               <span>Final Score: <strong>${p.scores.final}</strong></span>
@@ -401,7 +376,7 @@
       }).join('');
     }
 
-    init();
+    renderFiltered();
   </script>
 </body>
 </html>
