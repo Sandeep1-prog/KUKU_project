@@ -1,63 +1,124 @@
-# PromoFinder — Microdrama Promo Generation Engine
+# PromoFinder: Automated Promo Selection for Microdrama
 
-Automated, deterministic, local-first engine that parses episodic microdrama screenplays and discovers, scores, and ranks 20–60 second viral promo clips (hooks & cliffhangers) for TikTok, Instagram Reels, and YouTube Shorts.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Live App](https://img.shields.io/badge/Live%20Dashboard-GitHub%20Pages-brightgreen)](https://sandeep1-prog.github.io/KUKU_project/)
 
-Tested on **50 full screenplay episodes** of *"I Married a Broken Soldier. He was a Duke"*.
+A deterministic, local-first engine that parses full episodic microdrama screenplays and discovers, snaps, scores, and ranks 20–60 second viral promotional clips (hooks & cliffhangers) for TikTok, Instagram Reels, and YouTube Shorts.
+
+- **Live Web Dashboard:** [https://sandeep1-prog.github.io/KUKU_project/](https://sandeep1-prog.github.io/KUKU_project/)
+- **Runtime:** **4.61 seconds** on CPU across 50 full episodes (3,727 blocks) at **$0.00 cost** (no mandatory API calls).
+- **Core Principle:** Deterministic rules and boundary snapping first; optional pluggable LLM layer for shortlist judging.
 
 ---
 
-## 🚀 Quickstart & How to Run
+## Architecture Overview
+
+```
+episodes/*.txt
+     │
+[1. Parser] ──────────► Dialogue, Camera, and Action objects with sub-second timestamps
+     │
+[2. Enricher] ────────► Emotional intensity scoring & 1-second rolling tension curves
+     │
+[3. Candidate Gen] ───► Sliding 20–60s windows anchored on dialogue & action beats
+     │
+[4. Snapping & Filter]► Boundary snapping (pre-camera cuts, reaction holds) & hard gates
+     │
+[5. Feature Scorer] ──► Hook (0-3s), Cliffhanger (last 5s), Clarity, and Intensity
+     │
+[6. Ranker & Filter] ─► Temporal IoU deduplication (<=0.20) & per-episode diversity caps
+     │
+[7. Deliverables] ────► promos.json, promos.csv, report.md, interactive dashboard
+```
+
+---
+
+## 3-Stage Narrative Posting Sequence
+
+To prevent plot spoilers while maximizing viewer retention across social media campaigns, candidate clips are organized into a 3-stage sequence:
+
+| Stage | Episodes | Focus | Key Example |
+|---|---|---|---|
+| **1. Initial Hook** | Eps 1–16 | Betrayal & Humiliation (0 context needed) | **Ep 1 (00:35–01:20):** *"Why are you holding her hand?"* $\rightarrow$ *"Father..."* |
+| **2. Rising Action** | Eps 17–33 | The "broken soldier" husband defends Juliana | **Ep 15 (00:53–01:24):** *"What? You want to fight us, veteran?!"* |
+| **3. Pre-Climax** | Eps 34–38 | High-stakes courtroom inquiry cut at the key question | **Ep 34 (00:37–01:17):** *"And did she speak words you could not understand?"* |
+
+*Note: Episodes 39–50 are strictly excluded from promo circulation to protect the series finale resolution.*
+
+---
+
+## Quickstart & Local Execution
 
 ### 1. Prerequisites
 - Python 3.10+
-- Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run PromoFinder CLI
-To run the full end-to-end pipeline across all 50 episodes and generate ranked promo moments:
+### 2. Run the Engine CLI
+Run the full discovery, scoring, and ranking pipeline across all 50 episodes:
 ```bash
 python -m promofinder.cli --top 20
 ```
 
-To specify custom input/output directories:
+### 3. Launch Local Review App
+Run the local Streamlit dashboard:
 ```bash
-python -m promofinder.cli --input "I Married a Broken Soldier. He was a Duke-script/I Married a Broken Soldier. He was a Duke" --out out --top 20
+python -m streamlit run app.py
 ```
+Or open the static web dashboard (`index.html`) directly in your browser.
 
-### 3. Run Automated Tests
+### 4. Run Unit Tests
 ```bash
 python -m pytest tests
 ```
 
 ---
 
-## 📊 Outputs & Deliverables
+## Deliverables & Outputs
 
-Every run produces clean unedited deliverables in the `out/` folder:
-- **`out/promos.json`**: Complete structured output with episode numbers, exact `MM:SS.cc` timestamps, duration, scores, matched lexical evidence, and explanations.
-- **`out/promos.csv`**: Flat spreadsheet formatted for editorial review and video cutters.
-- **`out/report.md`**: Human-readable breakdown of the top promos, ranked by tiers (`POST_FIRST`, `STRONG`, `BACKUP`).
-- **`QUALITY_EVALUATION.md`**: Evaluation report detailing failure modes, soft-cliffhanger edge cases, and quality limitations.
-
----
-
-## 🏆 Top Picks to Post First
-
-| Rank | Tier | Ep | Timestamps | Duration | Opening Hook (0-3s) | Cliffhanger Cut Point |
-|:---:|:---:|:---:|:---:|:---:|:---|:---|
-| **1** | `POST_FIRST` | **Ep 1** | `00:35.15` - `01:20.50` | 45.35s | *Juliana: "Why are you holding her hand?" / Clarissa: "Because he is marrying me."* | *Juliana: "Father..."* |
-| **2** | `POST_FIRST` | **Ep 34** | `00:37.25` - `01:17.50` | 40.25s | *Judge: "Prudence. You served beside the accused?"* | *Judge: "And did she speak words you could not understand?"* |
-| **3** | `POST_FIRST` | **Ep 2** | `00:00.00` - `00:34.20` | 34.20s | *Gerald: "I cannot marry you, Juliana."* | *Juliana (O.S.): "Father..."* |
-| **4** | `POST_FIRST` | **Ep 3** | `00:13.55` - `00:43.30` | 29.75s | *Clarissa: "I didn't steal what was never truly yours."* | *Juliana: "Leave where?"* |
-| **5** | `POST_FIRST` | **Ep 2** | `00:47.55` - `01:18.40` | 30.85s | *Clarissa: "Why are you surprised, sister? Look at you."* | *Juliana: "You abandoned a woman who trusted you..."* |
+Every run produces clean, unedited deliverables in the `out/` directory:
+- **`out/promos.json`**: Structured JSON payload containing exact `MM:SS.cc` timestamps, duration, scores, matched lexical evidence, and explanations.
+- **`out/promos.csv`**: Flat table formatted for editorial review and video cutters.
+- **`out/report.md`**: Human-readable markdown summary report.
+- **`SOLUTION_DOCUMENT.md`**: Detailed technical solution document evaluated across all 5 evaluation lenses.
+- **`QUALITY_EVALUATION.md`**: Failure mode analysis detailing edge cases and areas where heuristic tools struggle.
 
 ---
 
-## 🏗 Architecture & Scoring Engine
-1. **Parser (`promofinder/parser.py`)**: Robust screenplay parser extracting camera angles, actions, characters, dialogue, and emotions with sub-second timestamps.
-2. **Enricher (`promofinder/enrich.py`)**: Tension curves, shot frequencies, and emotion intensity modeling.
-3. **Candidate Generator (`promofinder/candidates.py`)**: Sub-minute segment windowing with boundary snapping (`snapping.py`).
-4. **Scorer & Filter (`promofinder/scoring.py`, `filters.py`)**: Evaluates hook power, cliffhangers, clarity, and spoiler risks using domain-tuned lexicons.
-5. **Ranker & Diversifier (`promofinder/rank.py`)**: Temporal IoU overlap suppression, per-episode caps, and tier assignment.
+## Repository Structure
+
+```
+├── promofinder/               # Core engine package
+│   ├── models.py              # Pydantic data models (Episode, Block, Candidate)
+│   ├── parser.py              # Screenplay regex parser
+│   ├── snapping.py            # Pre-camera & tail reaction cut snapping
+│   ├── enrich.py              # Emotion intensity & rolling tension curves
+│   ├── candidates.py          # 20-60s window generator
+│   ├── filters.py             # Non-negotiable hard constraint filters
+│   ├── scoring.py             # Hook, cliffhanger, clarity, and intensity scorers
+│   ├── rank.py                # Temporal IoU deduplication & tiering
+│   ├── report.py              # Export generators (JSON, CSV, MD)
+│   ├── util_time.py           # Timestamp parser and formatter
+│   └── cli.py                 # Command-line interface entry point
+├── config/
+│   ├── default.yaml           # Pipeline weights and thresholds
+│   └── lexicons/              # Domain-tuned emotional and lexical dictionaries
+├── tests/
+│   └── test_pipeline.py       # Pytest suite verifying invariants and parsing
+├── out/                       # Unedited run deliverables
+│   ├── promos.json
+│   ├── promos.csv
+│   └── report.md
+├── index.html                 # Minimal, clean standalone web dashboard
+├── app.py                     # Streamlit review dashboard
+├── requirements.txt           # Python dependencies
+├── SOLUTION_DOCUMENT.md       # Complete evaluation document
+└── QUALITY_EVALUATION.md      # Honest failure analysis
+```
+
+---
+
+## Confidentiality Note
+Per assignment guidelines, raw screenplay files are excluded from this repository via `.gitignore`.
