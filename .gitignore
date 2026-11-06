@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.zip
+*.pdf
+
+# Exclude proprietary screenplay content from git
+I Married a Broken Soldier. He was a Duke-script/

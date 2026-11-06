@@ -1,0 +1,31 @@
+limits:
+  min_sec: 20.0
+  max_sec: 60.0
+  sweet_min: 30.0
+  sweet_max: 45.0
+
+snapping:
+  lead_in: 0.25
+  tail: 0.40
+  max_tail_extend: 2.0
+
+spoiler:
+  allowed_episode_fraction: 0.70
+
+weights:
+  hook: 0.30
+  cliff: 0.30
+  clarity: 0.15
+  intensity: 0.10
+  duration: 0.05
+  spoiler: 0.10
+
+gates:
+  min_hook: 0.35
+  min_cliff: 0.35
+
+rank:
+  top_k: 20
+  per_episode_cap: 2
+  overlap_max: 0.20
+  dup_jaccard: 0.60
