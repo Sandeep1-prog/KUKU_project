@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromoFinder — AI Microdrama Promo Moments</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #6366f1;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; }
+    p.subtitle { color: var(--text-muted); font-size: 1.1rem; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .metric-value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-top: 0.25rem; }
+    .filters {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    select, input {
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+    .promo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .promo-card:hover { border-color: var(--accent); }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+    .card-title { font-size: 1.2rem; font-weight: 700; }
+    .badge {
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-POST_FIRST { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .badge-STRONG { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .badge-BACKUP { background: #374151; color: #9ca3af; border: 1px solid #4b5563; }
+    .quote-block {
+      background: #0f172a;
+      border-left: 4px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .quote-cliff { border-left-color: var(--warning); }
+    .scores-grid {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .score-item strong { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎬 PromoFinder Dashboard</h1>
+      <p class="subtitle">Ranked Viral Promo Clips (Hooks & Cliffhangers) Across 50 Microdrama Episodes</p>
+    </header>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-value">50</div>
+        <div class="metric-label">Episodes Scanned</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">13,568</div>
+        <div class="metric-label">Raw Candidates Evaluated</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">4.61s</div>
+        <div class="metric-label">CPU Run Duration</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">20</div>
+        <div class="metric-label">Top Promos Curated</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <label>Filter Tier:
+        <select id="tierFilter" onchange="filterPromos()">
+          <option value="ALL">All Tiers</option>
+          <option value="POST_FIRST">POST_FIRST</option>
+          <option value="STRONG">STRONG</option>
+          <option value="BACKUP">BACKUP</option>
+        </select>
+      </label>
+      <label>Search Episode:
+        <input type="text" id="searchInput" placeholder="e.g. Ep 1" onkeyup="filterPromos()">
+      </label>
+    </div>
+
+    <div id="promosList"></div>
+  </div>
+
+  <script>
+    let allPromos = [];
+
+    async function loadPromos() {
+      try {
+        const res = await fetch('out/promos.json');
+        allPromos = await res.json();
+        renderPromos(allPromos);
+      } catch (e) {
+        document.getElementById('promosList').innerHTML = `<p style="color:#ef4444;">Failed to load promos.json. Make sure out/promos.json exists.</p>`;
+      }
+    }
+
+    function renderPromos(promos) {
+      const container = document.getElementById('promosList');
+      if (!promos.length) {
+        container.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:2rem;">No promos match the filter.</p>`;
+        return;
+      }
+
+      container.innerHTML = promos.map(p => {
+        const seg = p.segments[0];
+        return `
+          <div class="promo-card" data-tier="${p.tier}" data-ep="Ep ${seg.episode}">
+            <div class="card-header">
+              <div class="card-title">Rank #${p.rank} — Episode ${seg.episode} (${seg.start} to ${seg.end})</div>
+              <div>
+                <span class="badge badge-${p.tier}">${p.tier}</span>
+                <span style="font-size:0.85rem; color:#94a3b8; margin-left:8px;">${p.duration_sec}s</span>
+              </div>
+            </div>
+            
+            <div class="quote-block">
+              <strong style="color:#818cf8;">⚡ Opening Hook (First 3s):</strong><br>
+              ${p.hook}
+            </div>
+
+            <div class="quote-block quote-cliff">
+              <strong style="color:#fbbf24;">🧗 Cliffhanger Cut Point:</strong><br>
+              ${p.cliffhanger}
+            </div>
+
+            <p style="font-size:0.95rem; margin:0.75rem 0;"><strong>💡 Why It Works:</strong> ${p.why_it_works}</p>
+
+            <div class="scores-grid">
+              <div class="score-item">Final Score: <strong>${p.scores.final}</strong></div>
+              <div class="score-item">Hook: <strong>${p.scores.hook}</strong></div>
+              <div class="score-item">Cliffhanger: <strong>${p.scores.cliffhanger}</strong></div>
+              <div class="score-item">Clarity: <strong>${p.scores.clarity}</strong></div>
+              <div class="score-item">Intensity: <strong>${p.scores.intensity}</strong></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterPromos() {
+      const tier = document.getElementById('tierFilter').value;
+      const search = document.getElementById('searchInput').value.toLowerCase();
+
+      const filtered = allPromos.filter(p => {
+        const matchesTier = tier === 'ALL' || p.tier === tier;
+        const matchesSearch = `ep ${p.segments[0].episode}`.toLowerCase().includes(search);
+        return matchesTier && matchesSearch;
+      });
+
+      renderPromos(filtered);
+    }
+
+    loadPromos();
+  </script>
+</body>
+</html>
