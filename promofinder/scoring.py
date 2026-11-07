@@ -15,6 +15,25 @@ class RuleScorer:
             "duration": 0.05,
             "spoiler": 0.10
         }
+        # Pre-compile regexes once for massive speedup
+        self.hook_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.hook_words
+        ]
+        self.action_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.action_shock_words
+        ]
+        self.cliff_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.cliff_words
+        ]
+        self.rel_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.relationship_words
+        ]
+        self.prem_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.premise_words
+        ]
+        self.spoil_regexes = [
+            (w, re.compile(rf"\b{re.escape(w)}\b")) for w in self.lex.spoiler_words
+        ]
 
     def score_candidate(self, candidate: Candidate, episode: Episode, enrich_data: dict) -> ScoredCandidate | None:
         seg = candidate.segments[0]
@@ -37,39 +56,33 @@ class RuleScorer:
         }
 
         # ------------------ HOOK SCORE (0..1) ------------------
-        # Early start (first line or strong action in first 1.0s or 3.0s)
         first_dia = dia_blocks[0]
         start_diff = first_dia.start - seg.start
         early_start = 1.0 if start_diff <= 1.0 else (0.5 if start_diff <= 3.0 else 0.0)
 
-        # First line power (words in hook_words)
         first_text_lower = first_dia.text.lower()
-        matched_hook_words = [w for w in self.lex.hook_words if re.search(rf"\b{re.escape(w)}\b", first_text_lower)]
+        matched_hook_words = [w for w, rgx in self.hook_regexes if rgx.search(first_text_lower)]
         first_line_power = min(1.0, len(matched_hook_words) * 0.40)
         if matched_hook_words:
             evidence["hook"].extend([f"word:{w}" for w in matched_hook_words])
 
-        # First line intensity
         first_intensity = self.lex.get_emotion_intensity(first_dia.emotion_tags)
         if first_dia.emotion_tags:
             evidence["hook"].extend([f"tag:{t}" for t in first_dia.emotion_tags])
 
-        # Action shock in first 3 seconds
         action_shock = 0.0
         early_actions = [a for a in act_blocks if a.start - seg.start <= 3.0]
         for a in early_actions:
             a_text = a.text.lower()
-            matched_act = [w for w in self.lex.action_shock_words if re.search(rf"\b{re.escape(w)}\b", a_text)]
+            matched_act = [w for w, rgx in self.action_regexes if rgx.search(a_text)]
             if matched_act:
                 action_shock = 1.0
                 evidence["hook"].extend([f"action:{w}" for w in matched_act])
                 break
 
-        # Short punch (2-8 words)
         word_count = len(first_dia.text.split())
         short_punch = 1.0 if (2 <= word_count <= 8) else 0.4
 
-        # Pronoun start penalty
         first_word = first_text_lower.split()[0].strip(",.!?") if first_text_lower else ""
         pronoun_start = 1.0 if first_word in PRONOUNS else 0.0
 
@@ -92,22 +105,18 @@ class RuleScorer:
         if ends_on_q_or_trailing:
             evidence["cliffhanger"].append("punctuation:unresolved")
 
-        # Threat or reveal words
-        matched_cliff = [w for w in self.lex.cliff_words if re.search(rf"\b{re.escape(w)}\b", last_text_lower)]
+        matched_cliff = [w for w, rgx in self.cliff_regexes if rgx.search(last_text_lower)]
         threat_or_reveal = min(1.0, len(matched_cliff) * 0.50)
         if matched_cliff:
             evidence["cliffhanger"].extend([f"cliff_word:{w}" for w in matched_cliff])
 
-        # Tension at end
         tension_curve = enrich_data.get("tension_curve", [])
         end_idx = min(len(tension_curve) - 1, int(seg.end))
         tension_at_end = tension_curve[end_idx] if end_idx < len(tension_curve) else 0.5
 
-        # Unresolved reaction CAMERA
         late_cam = [c for c in cam_blocks if c.start >= last_dia.end]
         unresolved_reaction = 1.0 if (late_cam and any("close-up" in (c.shot_type or "") or "insert" in (c.shot_type or "") for c in late_cam)) else 0.3
 
-        # Episode end bonus
         ep_end_bonus = 1.0 if (candidate.type == "EP_END" and (ends_on_q_or_trailing or threat_or_reveal > 0)) else 0.0
 
         raw_cliff = (
@@ -119,16 +128,20 @@ class RuleScorer:
         )
         cliff_score = max(0.0, min(1.0, raw_cliff))
 
+        # ------------------ EARLY GATING CUT ------------------
+        if hook_score < 0.35 or cliff_score < 0.35:
+            return None
+
         # ------------------ CLARITY SCORE (0..1) ------------------
         full_text_lower = " ".join(b.text.lower() for b in dia_blocks)
         distinct_speakers = {b.speaker for b in dia_blocks if b.speaker}
 
-        matched_rel = [w for w in self.lex.relationship_words if re.search(rf"\b{re.escape(w)}\b", full_text_lower)]
+        matched_rel = [w for w, rgx in self.rel_regexes if rgx.search(full_text_lower)]
         rel_score = min(1.0, len(matched_rel) * 0.35)
 
         few_speakers = 1.0 if (2 <= len(distinct_speakers) <= 3) else (0.6 if len(distinct_speakers) == 4 else 0.3)
 
-        matched_prem = [w for w in self.lex.premise_words if re.search(rf"\b{re.escape(w)}\b", full_text_lower)]
+        matched_prem = [w for w, rgx in self.prem_regexes if rgx.search(full_text_lower)]
         prem_score = min(1.0, len(matched_prem) * 0.30)
 
         clarity_score = max(0.0, min(1.0, 0.40 * rel_score + 0.30 * few_speakers + 0.30 * prem_score))
@@ -144,7 +157,7 @@ class RuleScorer:
 
         # ------------------ SPOILER RISK (0..1) ------------------
         ep_ratio = max(0.0, (episode.number - 15) / 35.0)
-        matched_spoil = [w for w in self.lex.spoiler_words if re.search(rf"\b{re.escape(w)}\b", full_text_lower)]
+        matched_spoil = [w for w, rgx in self.spoil_regexes if rgx.search(full_text_lower)]
         spoiler_score = max(0.0, min(1.0, 0.60 * ep_ratio + 0.40 * (1.0 if matched_spoil else 0.0)))
 
         # ------------------ DURATION FIT (0..1) ------------------
@@ -156,10 +169,6 @@ class RuleScorer:
         else:
             duration_fit = 0.5 + 0.5 * ((60.0 - dur) / 15.0)
         duration_fit = max(0.0, min(1.0, duration_fit))
-
-        # ------------------ GATING ------------------
-        if hook_score < 0.35 or cliff_score < 0.35:
-            return None
 
         # ------------------ RULE SCORE COMBINATION ------------------
         w = self.weights
@@ -183,14 +192,11 @@ class RuleScorer:
             evidence=evidence
         )
 
-        # Generate template explanations
         h_line = f"{first_dia.speaker}: \"{first_dia.text}\""
         if len(dia_blocks) > 1 and dia_blocks[1].speaker != first_dia.speaker:
             h_line += f" / {dia_blocks[1].speaker}: \"{dia_blocks[1].text}\""
 
         c_line = f"{last_dia.speaker}: \"{last_dia.text}\""
-
-        # Why it works summary
         why = f"High confrontation hook ({first_intensity:.2f} emotion); cuts on unresolved line '{last_text[:35]}...'."
 
         return ScoredCandidate(
